@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Libreria Web</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Course Project">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="../static/css/bootstrap4/bootstrap.min.css">
+        <link th:href="@{css/bootstrap4/bootstrap.min.css}" rel="stylesheet" />
+        <link rel="stylesheet" href="../static/css/main_styles.css"/>
+        <link th:href="@{css/main_styles.css}" rel="stylesheet" />
+    </head>
+
+    <body>
+
+        <div class="super_container">
+
+            <!-- Header -->
+
+            <header class="header d-flex flex-row">
+                <div class="header_content d-flex flex-row align-items-center">
+                    <!-- Logo -->
+                    <div class="logo_container">
+                        <div class="logo">
+                            <a href="/home"><img src="imagenes/logo.png" alt="">
+                                <span class="main_nav_item">libreria web</span></a>
+                        </div>
+                    </div>
+                </div>
+                <span th:if="${#lists.isEmpty(usuarios)}">
+                    <div class="header_side d-flex flex-row justify-content-center align-items-center">
+                        <span><a href="/registrar">Registrar</a></span>
+                        <span>/</span>
+                        <span><a href="/ingresar">Ingresar</a></span>
+                    </div>
+                </span>
+                <span th:each="usuario : ${usuarios}" th:if="${usuario.login == false}">
+                    <div class="header_side d-flex flex-row justify-content-center align-items-center">
+                        <span><a href="/registrar">Registrar</a></span>
+                        <span>/</span>
+                        <span><a href="/ingresar">Ingresar</a></span>
+                    </div>
+                </span>
+                <span th:each="usuario : ${usuarios}" th:if="${usuario.login == true}">
+                    <div class="header_side d-flex flex-row justify-content-center align-items-center">
+                        <span th:text="${usuario.nombre} + ' ' + ${usuario.apellido}"></span>
+                        <span>/</span>
+                        <span><i th:if="${usuario.login == true}"><a th:href="@{/usuario/logout/__${usuario.id}__}">Cerrar Sesion</a></i></span>
+                    </div>
+                </span>
+
+            </header>
+
+            <!-- Home -->
+
+            <div class="home">
+
+                <!-- Hero Slider -->
+                <div class="hero_slider_container">
+                    <!-- Hero Slide -->
+                    <div class="hero_slide">
+                        <div class="hero_slide_background" style="background-image:url(imagenes/slider_background.jpg)"></div>
+                        <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
+                            <div class="hero_slide_content text-center">
+                                <h1 data-animation-in="fadeInUp" data-animation-out="animate-out fadeOut">Aqui podras
+                                    encontrar tus <span>libros</span> favoritos!</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span th:each="usuario : ${usuarios}" th:if="${usuario.login == true}">
+                    <div class="hero_boxes">
+                        <div class="hero_boxes_inner">
+                            <div class="container">
+                                <div class="row">
+
+                                    <div class="col-lg-4 hero_box_col">
+                                        <div class="hero_box d-flex flex-row align-items-center justify-content-start">
+                                            <img src="imagenes/libro.png" class="svg" alt="">
+                                            <div class="hero_box_content">
+                                                <h2 class="hero_box_title">Libros</h2>
+                                                <a href="courses.html" class="hero_box_link">ver mas</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 hero_box_col">
+                                        <div class="hero_box d-flex flex-row align-items-center justify-content-start">
+                                            <img src="imagenes/autor.png" class="svg" alt="">
+                                            <div class="hero_box_content">
+                                                <h2 class="hero_box_title">Autores</h2>
+                                                <a href="courses.html" class="hero_box_link">ver mas</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 hero_box_col">
+                                        <div class="hero_box d-flex flex-row align-items-center justify-content-start">
+                                            <img src="imagenes/editorial.png" class="svg" alt="">
+                                            <div class="hero_box_content">
+                                                <h2 class="hero_box_title">Editoriales</h2>
+                                                <a href="teachers.html" class="hero_box_link">ver mas</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+                
+                <span th:each="usuario : ${usuarios}" th:if="${usuario.login == false}">
+                    <div class="hero_boxes">
+                        <div class="hero_boxes_inner">
+                            <div class="container">
+                                <div class="row">
+
+                                    <div class="col-lg-4 hero_box_col">
+                                        <div class="hero_box d-flex flex-row align-items-center justify-content-start">
+                                            <img src="imagenes/libro.png" class="svg" alt="">
+                                            <div class="hero_box_content">
+                                                <h2 class="hero_box_title" th:text="${#lists.size(libros)}"></h2>
+                                                <a href="courses.html" class="hero_box_link">Libros</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 hero_box_col">
+                                        <div class="hero_box d-flex flex-row align-items-center justify-content-start">
+                                            <img src="imagenes/autor.png" class="svg" alt="">
+                                            <div class="hero_box_content">
+                                                <h2 class="hero_box_title" th:text="${#lists.size(autores)}"></h2>
+                                                <a href="courses.html" class="hero_box_link">Autores</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 hero_box_col">
+                                        <div class="hero_box d-flex flex-row align-items-center justify-content-start">
+                                            <img src="imagenes/editorial.png" class="svg" alt="">
+                                            <div class="hero_box_content">
+                                                <h2 class="hero_box_title" th:text="${#lists.size(editoriales)}"></h2>
+                                                <a href="teachers.html" class="hero_box_link">Editoriales</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+            </div>
+
+    </body>
+
+</html>

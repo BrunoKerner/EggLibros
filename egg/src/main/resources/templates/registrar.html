@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Registrar</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Course Project">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="../static/css/bootstrap4/bootstrap.min.css">
+        <link th:href="@{css/bootstrap4/bootstrap.min.css}" rel="stylesheet" />
+        <link rel="stylesheet" href="../static/css/main_styles.css"/>
+        <link th:href="@{css/main_styles.css}" rel="stylesheet" />
+        <style>
+            .red-button{
+                background-color: #cc0606;
+                color: #FFFFFF;
+            }
+            .red-button:hover{
+                background-color: #3a3a3a;
+                color: #cc0606;
+            }
+        </style> 
+    </head>
+
+    <body>
+
+        <div class="super_container">
+
+            <!-- Header -->
+
+            <header class="header d-flex flex-row">
+                <div class="header_content d-flex flex-row align-items-center">
+                    <!-- Logo -->
+                    <div class="logo_container">
+                        <div class="logo">
+                            <a href="/home"><img src="imagenes/logo.png" alt="">
+                                <span class="main_nav_item">libreria web</span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="header_side d-flex flex-row justify-content-center align-items-center">
+                    <span><a href="/registrar">Registrar</a></span>
+                    <span>/</span>
+                    <span><a href="/ingresar">Ingresar</a></span>
+                </div>
+
+            </header>
+            <div class="home">
+
+                <!-- Hero Slider -->
+                <div class="hero_slider_container">
+                    <!-- Hero Slide -->
+                    <div class="hero_slide">
+                        <div class="hero_slide_background" style="background-image:url(imagenes/slider_background.jpg)"></div>
+                        <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
+                            <div class="hero_slide_content text-center">
+                                <p th:if="${error != null}" th:text="${error}" style="color: white"></p>
+                                <p th:if="${exito != null}" th:text="${exito}" style="color: white"></p>
+                                <form action="/registrar" method="POST">
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label" style="color: white;">Nombre</label>
+                                        <input class="form-control" name="nombre">
+
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label" style="color: white;">Apellido</label>
+                                        <input class="form-control" name="apellido">
+
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label" style="color: white;">Email</label>
+                                        <input type="email" class="form-control" id="exampleInputEmail1"
+                                               aria-describedby="emailHelp" name="email">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label" style="color: white;">Contraseña</label>
+                                        <input type="password" class="form-control" id="exampleInputPassword1" name="clave">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label" style="color: white;">Tipo de Usuario</label>
+                                        <br>
+                                        <select class="form-select" aria-label="Default select example" name="administrador">
+                                            <option value="2">Usuario común</option>
+                                            <option value="1">Usuario administrador</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn red-button">Enviar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+    </body>
+
+</html>

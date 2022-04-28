@@ -1,0 +1,33 @@
+.fondo{
+    text-align: center !important;
+    background-image: url("https://images2.alphacoders.com/261/thumb-1920-26102.jpg") !important;
+}
+
+.fondo2{
+    text-align: center !important;
+    background-image: url("../imagenes/slider_background.jpg") !important;
+}
+
+label{
+    color: peachpuff !important;
+}
+
+.titulo{
+    color: blanchedalmond !important;
+}
+
+h3{
+     color: peachpuff !important;
+}
+th{
+    color: #FFFFFF !important;
+}
+td{
+    color: #FFFFFF !important; 
+}
+.red-button{
+    background-color: #cc0606 !important;
+    color: #3a3a3a !important;
+    font-size: 20px !important;
+    border-radius: 12px !important;
+}
