@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
     <head>
-        <title>Registrar</title>
+        <title>Ingresar</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="Course Project">
@@ -55,9 +55,9 @@
                         <div class="hero_slide_background" style="background-image:url(imagenes/slider_background.jpg)"></div>
                         <div class="hero_slide_container d-flex flex-column align-items-center justify-content-center">
                             <div class="hero_slide_content text-center">
-                                <p th:if="${error != null}" th:text="${error}" style="color: white"></p>
-                                <p th:if="${exito != null}" th:text="${exito}" style="color: white"></p>
-                                <form th:each="usuario : ${usuarios}">
+                                <p th:if="${error != null}" th:text="${error}" style="color: white">ERROR</p>
+                                <p th:if="${exito != null}" th:text="${exito}" style="color: white">EXITO</p>
+                                <form action="/ingresar" method="POST">
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label" style="color: white;">Email</label>
                                         <input type="email" class="form-control" id="exampleInputEmail1"
@@ -67,7 +67,7 @@
                                         <label for="exampleInputPassword1" class="form-label" style="color: white;">Contraseña</label>
                                         <input type="password" class="form-control" id="exampleInputPassword1" name="clave">
                                     </div>
-                                    <button type="submit" class="btn red-button"><a style="color: inherit; text-decoration: inherit" th:href="@{/usuario/login/__${usuario.id}__}">Ingresar<a/></button>
+                                    <button type="submit" class="btn red-button"><a>Ingresar<a/></button>
                                 </form>
                             </div>
                         </div>

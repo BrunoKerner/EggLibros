@@ -7,6 +7,7 @@ package com.libros.egg.servicios;
 
 import com.libros.egg.entidades.Usuario;
 import com.libros.egg.repositorios.UsuarioRepositorio;
+import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,15 +63,15 @@ public class UsuarioServicio {
     }
 
     @Transactional
-    public Usuario usuarioLogin(String id, String clave) throws Exception {
+    public Usuario usuarioLogin(String email, String clave) throws Exception {
 
-        Usuario u = ur.buscarPorId(id);
+        Usuario u = ur.buscarPorEmail(email);
 
         if (u != null) {
             if (clave.equals(u.getClave())) {
                 u.setLogin(true);
                 return ur.save(u);
-            }else{
+            } else {
                 throw new Exception("Clave incorrecta");
             }
 

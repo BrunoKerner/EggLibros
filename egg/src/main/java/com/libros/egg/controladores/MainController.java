@@ -69,10 +69,14 @@ public class MainController {
 
     @GetMapping("/home")
     public String home(ModelMap modelo) {
+        List<Usuario> usuariosLogin = ur.findLogin();
+        List<Usuario> usuariosAdmin = ur.findAdmin();
         List<Usuario> usuarios = ur.findAll();
         List<Libro> libros = lr.findAll();
         List<Autor> autores = ar.findAll();
         List<Editorial> editoriales = er.findAll();
+        modelo.put("usuariosLogin", usuariosLogin);
+        modelo.put("usuariosAdmin", usuariosAdmin);
         modelo.put("usuarios", usuarios);
         modelo.put("libros", libros);
         modelo.put("autores", autores);
@@ -99,23 +103,22 @@ public class MainController {
 
     }
     
-    @GetMapping("/ingresar")
+     @GetMapping("/ingresar")
     public String ingresarUsuario(ModelMap modelo) {
-        List<Usuario> usuarios = ur.findAll();
-        modelo.put("usuarios", usuarios);
         return "ingresar.html";
     }
     
-    @GetMapping("/usuario/login/{id}")
-    public String usuarioLogin(ModelMap modelo, @PathVariable String id, @RequestParam String clave) throws Exception {
+    @PostMapping("/ingresar")
+    public String usuarioLogin(ModelMap modelo, @RequestParam String clave, @RequestParam String email) throws Exception {
 
         try {
-            us.usuarioLogin(id, clave);
+            us.usuarioLogin(email, clave);
+            return "redirect:/home";
         } catch (Exception e) {
             modelo.put("error", e.getMessage());
+            return "/ingresar";
         }
         
-        return "redirect:/home";
     }
     
     @GetMapping("/usuario/logout/{id}")
